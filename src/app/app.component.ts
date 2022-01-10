@@ -1,15 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
-import { FabricjsEditorComponent } from 'projects/angular-editor-fabric-js/src/public-api';
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { FabricjsEditorComponent } from "projects/angular-editor-fabric-js/src/public-api";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'angular-editor-fabric-js';
+  editOptionType = "main";
+  addedText = [];
+  images = [];
 
-  @ViewChild('canvas', {static: false}) canvas: FabricjsEditorComponent;
+  @ViewChild("canvas", { static: false }) canvas: FabricjsEditorComponent;
 
   public rasterize() {
     this.canvas.rasterize();
@@ -36,6 +38,9 @@ export class AppComponent {
   }
 
   public addText() {
+    if (this.canvas.textString) {
+      this.addedText.push(this.canvas.textString);
+    }
     this.canvas.addText();
   }
 
@@ -49,6 +54,10 @@ export class AppComponent {
 
   public readUrl(event) {
     this.canvas.readUrl(event);
+    setTimeout(() => {
+      console.log(this.canvas.url);
+      this.images.push(this.canvas.url);
+    }, 2000);
   }
 
   public removeWhite(url) {
