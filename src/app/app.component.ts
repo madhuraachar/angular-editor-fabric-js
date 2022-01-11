@@ -55,7 +55,6 @@ export class AppComponent {
   public readUrl(event) {
     this.canvas.readUrl(event);
     setTimeout(() => {
-      console.log(this.canvas.url);
       this.images.push(this.canvas.url);
     }, 2000);
   }
